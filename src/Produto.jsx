@@ -1,12 +1,17 @@
-import React from 'react'
+import React from 'react';
+import { GlobalContext } from './GlobalContext';
 
-const Produto = ({dados}) => {
-  return (
-    <div>
-        <h1>{dados.nome}</h1>
-        <p>R$ {dados.preco}</p>
-    </div>
-  )
-}
+const Produto = () => {
+  const {dados, limparDados} = React.useContext(GlobalContext);
+  if(dados){
+    return (
+      <div>
+        <p>{dados.map((dado,index) => <li key={index}>{dado.nome}</li>)}</p>
+        <button onClick={limparDados}>Limpar dados</button>
+      </div>
+    )
+  }
+  return null;
+};
 
-export default Produto
+export default Produto;
