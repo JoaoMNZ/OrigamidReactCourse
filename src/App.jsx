@@ -1,20 +1,17 @@
-import React from 'react'
-import Produto from './Produto';
-import { GlobalStorage } from './GlobalContext';
-
-// Utilize o GlobalContext do exemplo anterior para puxar os dados da API abaixo:
-// https://ranekapi.origamid.dev/json/api/produto/
-// assim que o usuário acessar o app
-// coloque os dados da API no contexto global, dando acesso aos dados da mesma
-// defina uma função chamada limparDados que é responsável por zerar os dados de produto
-// e exponha essa função no contexto global
+import React from 'react';
+import useFetch from './Hooks/useFetch';
 
 const App = () => {
-  return (
-    <GlobalStorage>
-      <Produto />
-    </GlobalStorage>
-  );
+  const { data, loading, error, request } = useFetch();
+
+  React.useEffect(() => {
+    request('https://ranekapi.origamid.dev/json/api/produto/notebook');
+  }, [request]);
+
+  if (error) return <p>{error}</p>;
+  if (loading) return <p>Carregando...</p>;
+  if (data) return <div>{data.nome}</div>;
+  else return null;
 };
 
-export default App
+export default App;
