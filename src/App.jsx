@@ -1,39 +1,21 @@
 import React from 'react';
-
-const coresArray = ['azul', 'roxo', 'laranja', 'verde', 'vermelho', 'cinza'];
+import Input from './Form/Input'
+import Select from './Form/Select'
+import Radio from './Form/Radio';
+import Checkbox from './Form/Checkbox'
 
 const App = () => {
-  const [cores, setCores] = React.useState([]);
-
-  function handleChange({ target }) {
-    if (target.checked) {
-      setCores([...cores, target.value]);
-    } else {
-      setCores(cores.filter((cor) => cor !== target.value));
-    }
-  }
-
-  function handleChecked(cor) {
-    return cores.includes(cor);
-  }
+  const [name,setName] = React.useState("");
+  const [select,setSelect] = React.useState("");
+  const [radio,setRadio] = React.useState("");
+  const [cores,setCores] = React.useState([]);
 
   return (
     <form>
-      {coresArray.map( (cor) => 
-      <label key={cor} style={{textTransform: "capitalize"}}>
-        <input 
-          type="checkbox" 
-          value={cor} 
-          checked={handleChecked(cor)} 
-          onChange={handleChange} 
-        />
-        {cor}
-      </label>) }
-      <ul>
-        {cores.map((cor) => (
-          <li key={cor}>{cor}</li>
-        ))}
-      </ul>
+      <Input id="name" label="Name" value={name} setValue={setName} required="required"/>
+      <Select value={select} setValue={setSelect} options={["Notebook","Smartphone","Tablet"]}/>
+      <Radio value={radio} setValue={setRadio} options={["Masculino","Feminino"]}/>
+      <Checkbox value={cores} setValue={setCores} options={["Vermelho","Azul"]}/>
     </form>
   );
 };
