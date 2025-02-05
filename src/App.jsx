@@ -1,28 +1,41 @@
 import React from 'react';
-import { FormDatasProvider } from './Form/FormDatas';
-import Form from './Form/Form';
-import FormField from './Form/FormField';
+
+const coresArray = ['azul', 'roxo', 'laranja', 'verde', 'vermelho', 'cinza'];
 
 const App = () => {
-  const formFields = [
-    { type: "text", id: "nome", labelName: "Nome" },
-    { type: "email", id: "email", labelName: "Email" },
-    { type: "password", id: "senha", labelName: "Senha" },
-    { type: "text", id: "cep", labelName: "Cep" },
-    { type: "text", id: "rua", labelName: "Rua" },
-    { type: "text", id: "numero", labelName: "Numero" },
-    { type: "text", id: "bairro", labelName: "Bairro" },
-    { type: "text", id: "cidade", labelName: "Cidade" },
-    { type: "text", id: "estado", labelName: "Estado" },
-  ];
+  const [cores, setCores] = React.useState([]);
 
-  return(
-    <FormDatasProvider>
-      <Form>
-        {formFields.map(({ type,id,labelName }) => <FormField key={id} type={type} id={id} labelName={labelName}/>)}
-      </Form>
-    </FormDatasProvider>
-  )
+  function handleChange({ target }) {
+    if (target.checked) {
+      setCores([...cores, target.value]);
+    } else {
+      setCores(cores.filter((cor) => cor !== target.value));
+    }
+  }
+
+  function handleChecked(cor) {
+    return cores.includes(cor);
+  }
+
+  return (
+    <form>
+      {coresArray.map( (cor) => 
+      <label key={cor} style={{textTransform: "capitalize"}}>
+        <input 
+          type="checkbox" 
+          value={cor} 
+          checked={handleChecked(cor)} 
+          onChange={handleChange} 
+        />
+        {cor}
+      </label>) }
+      <ul>
+        {cores.map((cor) => (
+          <li key={cor}>{cor}</li>
+        ))}
+      </ul>
+    </form>
+  );
 };
 
 export default App;
