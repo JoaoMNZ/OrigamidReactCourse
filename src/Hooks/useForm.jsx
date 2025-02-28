@@ -3,7 +3,7 @@ import React from 'react'
 const types = {
     email: {
         regex: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-        message: "Please enter a valid email adress",
+        message: "Please enter a valid email adress.",
     },
 };
 
@@ -12,10 +12,9 @@ const useForm = (type) => {
     const [error, setError] = React.useState("");
 
     function validate(){
-        console.log(type);
         if(type === false) return true;
         if(value.length === 0) {
-            setError("Please enter a value");
+            setError("This field is required.");
             return false;
         }else if(types[type] && !types[type].regex.test(value)){
             setError(types[type].message);
