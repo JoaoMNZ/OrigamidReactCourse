@@ -5,8 +5,9 @@ import Header from './Components/Header';
 import Footer from './Components/Footer';
 import Home from './Components/Home';
 import Login from './Components/Login/Login';
-import Profile from './Components/Profile'
+import Profile from './Components/User/Profile'
 import { UserStorage } from './UserContext';
+import ProtectedRoute from './Components/Helper/ProtectedRoute';
 
 const App = () => {
   return (
@@ -15,8 +16,8 @@ const App = () => {
         <Header/>
         <Routes>
           <Route path="/" element={<Home/>}/>
-          <Route path="/login/*" element={<Login/>}/>
-          <Route path="/profile" element={<Profile/>}/>
+          <Route path="/login/*" element={<ProtectedRoute path='/profile' order={false}><Login/></ProtectedRoute>}/>
+          <Route path="/profile/*" element={<ProtectedRoute path='/login' order={true}><Profile/></ProtectedRoute>}/>
         </Routes>
         <Footer/>
       </UserStorage>

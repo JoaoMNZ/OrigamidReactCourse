@@ -22,18 +22,18 @@ const LoginForm = () => {
 
     return (
         <section className="animeLeft">
-            <h1 className='title'>Log In</h1>
+            <h1 className='title'>Log in</h1>
             <form className={styles.form} onSubmit={handleSubmit}>
                 <Input label="Username" id="username" type="text" value={username} {...username}/>
                 <Input label="Password" id="password" type="password" value={password} {...password}/>
-                {loading ? <Button disabled>Loading...</Button> : <Button>Log In</Button>}
+                {loading ? <Button disabled>Loading...</Button> : <Button>Log in</Button>}
                 <Error error={error}/>
             </form>
             <Link className={styles.forgotten} to="/login/forgotten">Forgot password?</Link>
             <div className={styles.signup}>
                 <h2 className={styles.subtitle}>Create a new account</h2>
                 <p>Doesn't have an account yet?</p>
-                <Link className={buttonStyles.button} to="/login/create">Sign Up</Link>
+                <Link className={buttonStyles.button} to="/login/create">Sign up</Link>
             </div>
             
         </section>

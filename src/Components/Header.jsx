@@ -11,11 +11,10 @@ const Header = () => {
       <nav className={`${styles.nav} container`}>
         <Link to="/" aria-label='Dogs - Home' className={styles.logo}><Dogs/></Link>
         {data ? <>
-            <button onClick={userLogout}>Logout</button>
             <Link to="/profile" className={styles.login}>{data.nome}</Link> 
           </>
           : 
-          <Link to="/login" className={styles.login}>Login / Sign up</Link>}
+          <Link to="/login" className={styles.login}>Log in / Sign up</Link>}
       </nav>
     </header>
   )
