@@ -1,11 +1,12 @@
 import React from 'react'
 import useFetch from './Hooks/useFetch';
-import { TOKEN_POST, TOKEN_VALIDATE_POST, USER_POST, USER_GET } from './api';
+import { TOKEN_POST, TOKEN_VALIDATE_POST, USER_POST, USER_GET, PHOTO_POST } from './api';
 
 export const UserContext = React.createContext();
 
 export const UserStorage = ({children}) => {
-    const {data, setData, error, loading, request} = useFetch();
+    const {error, loading, request} = useFetch();
+    const [data, setData] = React.useState();
     const [login, setLogin] = React.useState(null);
 
     const userLogout = React.useCallback(
@@ -17,8 +18,9 @@ export const UserStorage = ({children}) => {
         
     async function getUser(token){
         const {url, options} = USER_GET(token);
-        const {response} = await request(url, options);
+        const {response,json} = await request(url, options);
         if(response.ok){
+            setData(json);
             setLogin(true);
         }
     }
@@ -40,6 +42,12 @@ export const UserStorage = ({children}) => {
         }
     }
 
+    async function postPhoto(formData){
+        const {url, options} = PHOTO_POST(window.localStorage.getItem('token'), formData);
+        const {response} = await request(url, options);
+        return response.ok;
+    }
+
     React.useEffect(() => {
         async function autoLogin() {
             const token = localStorage.getItem("token");
@@ -57,7 +65,7 @@ export const UserStorage = ({children}) => {
     }, [userLogout]);
 
     return (
-        <UserContext.Provider value={{userSignup, userLogin, userLogout, data, error, loading, login}}>{children}</UserContext.Provider>
+        <UserContext.Provider value={{userSignup, userLogin, userLogout, postPhoto, data, error, loading, login}}>{children}</UserContext.Provider>
     )
 }
 

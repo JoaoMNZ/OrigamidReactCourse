@@ -9,6 +9,10 @@ const types = {
         regex: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/,
         message: "Password must be at least 8 characters long and include at least one uppercase letter, one lowercase letter, and one digit.",
     },
+    number: {
+        regex: /^\d+$/,
+        message: "Please enter a valid, positive number.",
+    }
 };
 
 const useForm = (type) => {
