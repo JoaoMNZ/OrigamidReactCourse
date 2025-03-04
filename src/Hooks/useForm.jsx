@@ -32,7 +32,6 @@ const useForm = (type) => {
             setError(null);
             return true;
         }
-
     }
 
     function onChange({target}){

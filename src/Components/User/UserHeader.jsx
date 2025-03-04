@@ -8,8 +8,8 @@ const UserHeader = () => {
     const {pathname} = useLocation();
     React.useEffect(() => {
       switch(pathname){
-        case '/profile/stats': setTitle("Your stats"); break;
-        case '/profile/post': setTitle("Post your photos"); break;
+        case '/profile/stats': setTitle("Stats"); break;
+        case '/profile/post': setTitle("Post your photo"); break;
         default: setTitle('My account');
       }
     }, [pathname])

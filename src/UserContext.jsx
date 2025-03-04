@@ -1,6 +1,6 @@
 import React from 'react'
 import useFetch from './Hooks/useFetch';
-import { TOKEN_POST, TOKEN_VALIDATE_POST, USER_POST, USER_GET, PHOTO_POST } from './api';
+import { TOKEN_POST, TOKEN_VALIDATE_POST, USER_POST, USER_GET, PHOTO_POST, PHOTOS_GET } from './api';
 
 export const UserContext = React.createContext();
 
@@ -48,6 +48,12 @@ export const UserStorage = ({children}) => {
         return response.ok;
     }
 
+    async function getPhotos(){
+        const {url, options} = PHOTOS_GET({page: 1, total: 6, user: 0});
+        const {json} = await request(url, options);
+        return json;
+    }
+
     React.useEffect(() => {
         async function autoLogin() {
             const token = localStorage.getItem("token");
@@ -65,7 +71,7 @@ export const UserStorage = ({children}) => {
     }, [userLogout]);
 
     return (
-        <UserContext.Provider value={{userSignup, userLogin, userLogout, postPhoto, data, error, loading, login}}>{children}</UserContext.Provider>
+        <UserContext.Provider value={{userSignup, userLogin, userLogout, postPhoto, getPhotos, data, error, loading, login}}>{children}</UserContext.Provider>
     )
 }
 
