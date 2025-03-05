@@ -48,19 +48,13 @@ export const UserStorage = ({children}) => {
         return response.ok;
     }
 
-    async function getPhotos(){
-        const {url, options} = PHOTOS_GET({page: 1, total: 6, user: 0});
-        const {json} = await request(url, options);
-        return json;
-    }
-
     React.useEffect(() => {
         async function autoLogin() {
             const token = localStorage.getItem("token");
             if(token) {
                 const {url, options} = TOKEN_VALIDATE_POST(token);
                 const {response} = await request(url, options);
-                if(response.ok) {
+                if(response && response.ok) {
                     getUser(token);
                 }else{
                     userLogout();
@@ -71,7 +65,7 @@ export const UserStorage = ({children}) => {
     }, [userLogout]);
 
     return (
-        <UserContext.Provider value={{userSignup, userLogin, userLogout, postPhoto, getPhotos, data, error, loading, login}}>{children}</UserContext.Provider>
+        <UserContext.Provider value={{userSignup, userLogin, userLogout, postPhoto, data, error, loading, login}}>{children}</UserContext.Provider>
     )
 }
 

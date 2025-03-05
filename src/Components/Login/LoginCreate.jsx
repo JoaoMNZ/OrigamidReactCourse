@@ -5,6 +5,7 @@ import Error from '../Helper/Error'
 import useForm from '../../Hooks/useForm'
 import buttonStyles from '../Forms/Button.module.css'
 import { UserContext } from '../../UserContext'
+import Head from '../Head'
 
 const LoginCreate = () => {
     const username = useForm();
@@ -21,6 +22,7 @@ const LoginCreate = () => {
 
     return (
       <section>
+        <Head title="Sign up"/>
         <h1 className='title'>Sign up</h1>
         <form onSubmit={handleSubmit}>
           <Input label="Username" id="username" type="text" value={username} {...username}/>

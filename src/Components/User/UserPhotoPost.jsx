@@ -7,6 +7,7 @@ import useForm from '../../Hooks/useForm'
 import { UserContext } from '../../UserContext'
 import { useNavigate } from 'react-router-dom'
 import Error from '../Helper/Error'
+import Head from '../Head'
 
 const UserPhotoPost = () => {
   const {loading, error, postPhoto} = React.useContext(UserContext);
@@ -38,6 +39,7 @@ const UserPhotoPost = () => {
 
   return (
     <section className={`${styles.photoPost} animeLeft`}>
+      <Head title="Post your photo"/>
       <form onSubmit={handleSubmit}>
         <Input label="Name" id="name" type="text" {...name}/>
         <Input label="Weight" id="weight" type="number" {...weight}/>

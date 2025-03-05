@@ -66,10 +66,6 @@ export function PHOTO_POST(token, formData){
 export function PHOTO_GET(id){
     return{
         url: `${API_URL}/api/photo/${id}`,
-        options:{
-            method: 'GET',
-            cache: 'no-store',
-        },
     }  
 }
 
@@ -105,6 +101,44 @@ export function COMMENT_POST(id, body){
                 Authorization: 'Bearer ' + window.localStorage.getItem('token'),
             },
             body: JSON.stringify(body),
+        },
+    }  
+}
+
+export function PASSWORD_LOST(body){
+    return{
+        url: `${API_URL}/api/password/lost`,
+        options:{
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(body),
+        },
+    }  
+}
+
+export function PASSWORD_RESET(body){
+    return{
+        url: `${API_URL}/api/password/reset`,
+        options:{
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(body),
+        },
+    }  
+}
+
+export function STATS_GET(body){
+    return{
+        url: `${API_URL}/api/stats`,
+        options:{
+            method: 'GET',
+            headers: {
+                Authorization: 'Bearer ' + window.localStorage.getItem("token"),
+            },
         },
     }  
 }
